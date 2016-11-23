@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category">
+        <item >게임</item>
+        <item >식사</item>
+        <item >이동</item>
+        <item >공부</item>
+        <item >일</item>
+        <item >그외</item>
+    </string-array>
+</resources>
