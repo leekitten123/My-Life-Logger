@@ -10,13 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="한 일 기록하기"
-        android:textSize="50dp"/>
+        android:text="Welcome To My Life Logger !!!"
+        android:textSize="24dp"
+        android:textColor="#ff0000"/>
 
-    <Spinner
-        android:id="@+id/spinnerTask"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/category"/>
+        android:gravity="center"
+        android:background="#ffff00"
+        android:text="Choose Menu What You Want"
+        android:textSize="24dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/podium" />
 
 </LinearLayout>

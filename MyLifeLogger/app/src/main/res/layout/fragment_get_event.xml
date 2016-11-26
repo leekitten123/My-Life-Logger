@@ -13,9 +13,37 @@
         android:text="이벤트 기록하기"
         android:textSize="50dp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_CalenderEvent"/>
+
     <Spinner
         android:id="@+id/spinnerEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/category"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_location_event"
+        android:text="Button Location Event"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="세부내용"
+        android:textSize="30dp"/>
+    
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="저장"/>
 </LinearLayout>
