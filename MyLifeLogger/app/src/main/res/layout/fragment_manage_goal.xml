@@ -8,8 +8,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="목표 관리"
-        android:textSize="50dp" />
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="#4682B4"
+        android:text="목표 관리하기"
+        android:textSize="15dp"
+        android:textColor="#FFFFFF"/>
 
 </LinearLayout>

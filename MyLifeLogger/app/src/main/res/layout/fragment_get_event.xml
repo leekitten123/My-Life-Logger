@@ -96,13 +96,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Latitude: 0"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:id="@+id/text_EventLatitude"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Longitude: 0"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:id="@+id/text_EventLongitude"/>
     </LinearLayout>
 
     <LinearLayout
@@ -128,12 +130,14 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:gravity="start"
-            android:background="@drawable/draws"/>
+            android:background="@drawable/draws"
+            android:id="@+id/whatDoEvent"/>
     </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="저장"/>
+        android:text="저장"
+        android:id="@+id/btn_SaveEvent"/>
 </LinearLayout>
