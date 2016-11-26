@@ -3,43 +3,133 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DCDCDC"
     android:orientation="vertical"
     tools:context="com.example.hyojin.mylifelogger.MainScreenFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="#4682B4"
         android:text="이벤트 기록하기"
-        android:textSize="50dp"/>
+        android:textSize="15dp"
+        android:textColor="#FFFFFF"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/text_CalenderEvent"/>
+        android:layout_margin="1dp"
+        android:paddingLeft="15dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/spinnerEvent"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="날짜"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_CalenderEvent"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/category"/>
+        android:layout_margin="1dp"
+        android:paddingLeft="15dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
 
-    <Button
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="목록"
+            android:textColor="#000000"
+            android:textSize="25dp" />
+
+        <Spinner
+            android:id="@+id/spinnerEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/category"
+            android:scrollbarSize="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_location_event"
-        android:text="Button Location Event"/>
+        android:layout_margin="1dp"
+        android:paddingLeft="15dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
 
-    <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="위치"
+                android:textColor="#000000"
+                android:textSize="25dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/btn_location_event"
+                android:text="Btn"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Latitude: 0"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Longitude: 0"
+            android:textSize="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="세부내용"
-        android:textSize="30dp"/>
-    
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_margin="1dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="5dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="세부 내용"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="220dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="start"
+            android:background="@drawable/draws"/>
+    </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
