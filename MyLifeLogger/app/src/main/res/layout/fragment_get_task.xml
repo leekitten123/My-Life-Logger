@@ -103,6 +103,26 @@
             android:layout_height="wrap_content"
             android:text="Longitude: 0"
             android:textSize="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_PrintTime"
+            android:text="00:00:00"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/btn_TimeStatus"
+            android:text="시작" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/btn_TimeRecord"
+            android:text="기록"/>
     </LinearLayout>
 
     <LinearLayout
@@ -124,7 +144,7 @@
 
         <EditText
             android:layout_width="fill_parent"
-            android:layout_height="110dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:gravity="start"
