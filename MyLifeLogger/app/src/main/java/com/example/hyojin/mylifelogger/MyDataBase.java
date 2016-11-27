@@ -4,16 +4,16 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class MyDataBaseEvent extends SQLiteOpenHelper {
+public class MyDataBase extends SQLiteOpenHelper {
 
     /** 클래스 선언 시 생성자 **/
-    public MyDataBaseEvent(Context context){
-        super(context, "EventDataBase", null, 1);
+    public MyDataBase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
+        super(context, name, factory, version);
     }
 
     /** 데이터베이스 테이블 만들기 **/
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE database (_id INTEGER PRIMARY KEY AUTOINCREMENT, latitude REAL , longitude REAL , category INTEGER , date INTEGER , whatDo TEXT);");
+        db.execSQL("CREATE TABLE database (_id INTEGER PRIMARY KEY AUTOINCREMENT, latitude REAL , longitude REAL , category INTEGER , date INTEGER , time INTEGER , whatDo TEXT);");
     }
 
     /** 데이터베이스를 새로 생성 **/
@@ -23,9 +23,9 @@ public class MyDataBaseEvent extends SQLiteOpenHelper {
     }
 
     /** 데이터베이스에 정보 추가 **/
-    public void insertData (Double latitude, Double longitude, int category, int date, String whatDo) {
+    public void insertData (Double latitude, Double longitude, int category, int date, int time, String whatDo) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO database VALUES(NULL, " + latitude + ", " + longitude + ", " + category + ", " + date + ", '" + whatDo + "');");
+        db.execSQL("INSERT INTO database VALUES(NULL, " + latitude + ", " + longitude + ", " + category + ", " + date + ", " + time + ", '" + whatDo + "');");
         db.close();
     }
 }

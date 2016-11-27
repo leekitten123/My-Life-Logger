@@ -5,7 +5,6 @@ import android.content.Context;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,29 +19,31 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class GetEventFragment extends Fragment {
-    int iYear;
-    int iMonth;
-    int iDate;
+    /** 오늘 년, 월, 일 **/
+    int iYear = Calendar.getInstance().get(Calendar.YEAR) ;
+    int iMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+    int iDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) ;
 
+    /** 위도, 경도 **/
     static Double latitude = 0.0 ;
     static Double longitude = 0.0 ;
 
+    /** Spinner에서 가르키는 항목 **/
     static int eventCategory = 0 ;
 
-    MyDataBaseEvent eventDB ;
+    /** 이벤트를 저장하는 데이터베이스 **/
+    MyDataBase eventDB ;
 
+    /** 기본 생성자 **/
     public GetEventFragment() {}
 
+    /** GetEventFragment 생성 **/
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_get_event, container, false);
 
-        eventDB = new MyDataBaseEvent(getActivity()) ;
+        eventDB = new MyDataBase(getActivity(), "EventDataBase.db", null, 1);
 
-        Calendar today = Calendar.getInstance();
-        iYear = today.get(Calendar.YEAR);
-        iMonth = today.get(Calendar.MONTH) + 1;
-        iDate = today.get(Calendar.DAY_OF_MONTH);
-
+        /** 초기 달력 출력 **/
         TextView textViewCalenderEvent = (TextView) view.findViewById(R.id.text_CalenderEvent);
         textViewCalenderEvent.setText(iYear + "년 " + iMonth + "월 " + iDate + "일");
         iMonth -= 1;
@@ -68,7 +69,7 @@ public class GetEventFragment extends Fragment {
                 TextView textEventLatitude = (TextView) view.findViewById(R.id.text_EventLatitude) ;
                 TextView textEventLongitude = (TextView) view.findViewById(R.id.text_EventLongitude) ;
                 textEventLatitude.setText("Latitude: " + latitude);
-                textEventLongitude.setText("Lonitude: " + longitude);
+                textEventLongitude.setText("Longitude: " + longitude);
             }
         });
 
@@ -92,13 +93,14 @@ public class GetEventFragment extends Fragment {
             }
         });
 
+        /** DB에 값 저장하기 **/
         Button btnSaveEvent = (Button) view.findViewById(R.id.btn_SaveEvent) ;
         btnSaveEvent.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 int realDateNum = (iYear * 10000) + (iMonth * 100) + 100 + iDate ;
                 EditText editWhatDoEvent = (EditText) view.findViewById(R.id.whatDoEvent) ;
 
-                eventDB.insertData(latitude, longitude, eventCategory, realDateNum, editWhatDoEvent.getText().toString());
+                eventDB.insertData(latitude, longitude, eventCategory, realDateNum, 0, editWhatDoEvent.getText().toString());
                 editWhatDoEvent.setText("");
             }
         });
@@ -106,20 +108,14 @@ public class GetEventFragment extends Fragment {
         return view;
     }
 
+    /** 위치 정보를 가져오는 메서드 **/
     private void startLocationService() {
-        // 위치 관리자 객체 참조
         LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        // 위치 정보를 받을 리스너 생성
         GPSListener gpsListener = new GPSListener();
 
         try {
-            // GPS를 이용한 위치 요청
             manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
-
-            // 네트워크를 이용한 위치 요청
             manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, gpsListener);
-
         } catch (SecurityException ex) {
             ex.printStackTrace();
         }
@@ -127,7 +123,7 @@ public class GetEventFragment extends Fragment {
         latitude = gpsListener.latitude ;
         longitude = gpsListener.longitude ;
 
-        Toast.makeText(getActivity().getApplicationContext(), "위치 확인이 되었습니다.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getApplicationContext(), "위치 확인", Toast.LENGTH_SHORT).show();
     }
 }
 
