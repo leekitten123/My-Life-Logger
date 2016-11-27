@@ -28,6 +28,10 @@ public class GetEventFragment extends Fragment {
     static Double latitude = 0.0 ;
     static Double longitude = 0.0 ;
 
+    /** 위치정보를 보여주는 뷰 **/
+    TextView textEventLatitude ;
+    TextView textEventLongitude ;
+
     /** Spinner에서 가르키는 항목 **/
     static int eventCategory = 0 ;
 
@@ -60,16 +64,15 @@ public class GetEventFragment extends Fragment {
             }
         });
 
+        /** 위치정보를 보여주는 뷰 **/
+        textEventLatitude = (TextView) view.findViewById(R.id.text_EventLatitude) ;
+        textEventLongitude = (TextView) view.findViewById(R.id.text_EventLongitude) ;
+
         /** 위치 정보를 받는 이벤트 리스너 **/
         Button btnLocationEvent = (Button) view.findViewById(R.id.btn_location_event);
         btnLocationEvent.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 startLocationService();
-
-                TextView textEventLatitude = (TextView) view.findViewById(R.id.text_EventLatitude) ;
-                TextView textEventLongitude = (TextView) view.findViewById(R.id.text_EventLongitude) ;
-                textEventLatitude.setText("Latitude: " + latitude);
-                textEventLongitude.setText("Longitude: " + longitude);
             }
         });
 
@@ -108,7 +111,7 @@ public class GetEventFragment extends Fragment {
         return view;
     }
 
-    /** 위치 정보를 가져오는 메서드 **/
+    /** 위치 정보를 가져오는 메소드 **/
     private void startLocationService() {
         LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         GPSListener gpsListener = new GPSListener();
@@ -123,7 +126,8 @@ public class GetEventFragment extends Fragment {
         latitude = gpsListener.latitude ;
         longitude = gpsListener.longitude ;
 
-        Toast.makeText(getActivity().getApplicationContext(), "위치 확인", Toast.LENGTH_SHORT).show();
+        textEventLatitude.setText("Latitude: " + latitude);
+        textEventLongitude.setText("Longitude: " + longitude);
     }
 }
 

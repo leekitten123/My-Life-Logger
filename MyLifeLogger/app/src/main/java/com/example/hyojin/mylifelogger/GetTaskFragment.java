@@ -26,9 +26,17 @@ public class GetTaskFragment extends Fragment {
     int iMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
     int iDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) ;
 
+    /** 위도, 경도 **/
+    static Double latitude = 0.0 ;
+    static Double longitude = 0.0 ;
+
+    /** 위치정보를 보여주는 뷰 **/
+    TextView textTaskLatitude ;
+    TextView textTaskLongitude ;
+
     /** 스톱워치에 사용할 변수 **/
     statusStopWatch cur_Status = statusStopWatch.Init ;
-    int myCount = 1 ;
+    int myTimerCount = 1 ;
     long myBaseTime ;
     long myPauseTime ;
 
@@ -69,13 +77,9 @@ public class GetTaskFragment extends Fragment {
             }
         });
 
-        /** 위치 정보를 받는 이벤트 리스너 **/
-        Button btnLocationTask = (Button) view.findViewById(R.id.btn_location_Task);
-        btnLocationTask.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                startLocationService();
-            }
-        });
+        /** 위치정보를 보여주는 뷰 **/
+        textTaskLatitude = (TextView) view.findViewById(R.id.text_TaskLatitude) ;
+        textTaskLongitude = (TextView) view.findViewById(R.id.text_TaskLongitude) ;
 
         /** 스톱워치를 작동시키는 리스너 **/
         textPrintTime = (TextView) view.findViewById(R.id.text_PrintTime);
@@ -86,9 +90,12 @@ public class GetTaskFragment extends Fragment {
                     case Init:
                         myBaseTime = SystemClock.elapsedRealtime();
                         System.out.println(myBaseTime);
+                        Toast.makeText(getActivity().getApplicationContext(), getTimeOut(), Toast.LENGTH_SHORT).show() ;
+                        startLocationService();
                         myTimer.sendEmptyMessage(0);
-                        btnTimeStatus.setText("멈춤");
-                        //myBtnRec.setEnabled(true); //기록버튼 활성
+                        btnTimeStatus.setText("중지");
+                        btnTimeRecord.setText("기록");
+                        btnTimeRecord.setEnabled(true);
                         cur_Status = statusStopWatch.Run;
                         break;
 
@@ -96,7 +103,7 @@ public class GetTaskFragment extends Fragment {
                         myTimer.removeMessages(0);
                         myPauseTime = SystemClock.elapsedRealtime();
                         btnTimeStatus.setText("시작");
-                        //myBtnRec.setText("리셋");
+                        btnTimeRecord.setText("초기화");
                         cur_Status = statusStopWatch.Pause;
                         break;
 
@@ -104,33 +111,34 @@ public class GetTaskFragment extends Fragment {
                         long now = SystemClock.elapsedRealtime();
                         myTimer.sendEmptyMessage(0);
                         myBaseTime += (now - myPauseTime);
-                        btnTimeStatus.setText("멈춤");
-                        //myBtnRec.setText("기록");
+                        btnTimeStatus.setText("중지");
+                        btnTimeRecord.setText("기록");
                         cur_Status = statusStopWatch.Run;
                         break;
                 }
             }
         });
 
+        /** 스톱워치를 기록하는 리스너 **/
         btnTimeRecord = (Button) view.findViewById(R.id.btn_TimeRecord) ;
         btnTimeRecord.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 switch(cur_Status){
                     case Run:
-                        String str = String.format("%d. %s\n",myCount,getTimeOut());
-                        Toast.makeText(getActivity().getApplicationContext(), str, Toast.LENGTH_SHORT).show() ;
-                        //myRec.setText(str);
-                        myCount++ ;
+                        Toast.makeText(getActivity().getApplicationContext(), getTimeOut(), Toast.LENGTH_SHORT).show() ;
+                        startLocationService();
+                        myTimerCount++ ;
                         break;
 
                     case Pause:
+                        Toast.makeText(getActivity().getApplicationContext(), getTimeOut(), Toast.LENGTH_SHORT).show() ;
+                        startLocationService();
                         myTimer.removeMessages(0) ;
                         btnTimeStatus.setText("시작") ;
                         btnTimeRecord.setText("초기화") ;
                         textPrintTime.setText("00:00:00") ;
                         cur_Status = statusStopWatch.Init ;
-                        myCount = 1 ;
-                        //myRec.setText("");
+                        myTimerCount = 1 ;
                         btnTimeRecord.setEnabled(false);
                         break;
                 }
@@ -160,7 +168,7 @@ public class GetTaskFragment extends Fragment {
         return view;
     }
 
-    /** 위치 정보를 가져오는 메서드 **/
+    /** 위치 정보를 가져오는 메소드 **/
     private void startLocationService() {
         LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         GPSListener gpsListener = new GPSListener();
@@ -172,7 +180,11 @@ public class GetTaskFragment extends Fragment {
             ex.printStackTrace();
         }
 
-        Toast.makeText(getActivity().getApplicationContext(), "위치 확인", Toast.LENGTH_SHORT).show();
+        latitude = gpsListener.latitude ;
+        longitude = gpsListener.longitude ;
+
+        textTaskLatitude.setText("Latitude: " + latitude);
+        textTaskLongitude.setText("Longitude: " + longitude);
     }
 
     /** 스톱워치의 현재 정보 **/
