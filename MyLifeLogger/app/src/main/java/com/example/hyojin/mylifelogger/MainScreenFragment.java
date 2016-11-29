@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 public class MainScreenFragment extends Fragment {
 
     public MainScreenFragment() {
-        // Required empty public constructor
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

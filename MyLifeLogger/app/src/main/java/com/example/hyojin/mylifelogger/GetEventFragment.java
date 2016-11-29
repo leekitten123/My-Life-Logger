@@ -102,7 +102,10 @@ public class GetEventFragment extends Fragment {
                 EditText editWhatDoEvent = (EditText) view.findViewById(R.id.whatDoEvent) ;
 
                 eventDB.insertData(latitude, longitude, eventCategory, realDateNum, 0, editWhatDoEvent.getText().toString());
+
                 editWhatDoEvent.setText("");
+                textEventLatitude.setText("Latitude: 0");
+                textEventLongitude.setText("Longitude: 0");
             }
         });
 

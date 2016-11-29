@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/btn_location_event"
-                android:text="Btn"/>
+                android:text="업데이트"/>
         </LinearLayout>
 
         <TextView
@@ -141,8 +141,11 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="1dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:background="#4682B4"
         android:text="저장"
+        android:textColor="#FFFFFF"
         android:id="@+id/btn_SaveEvent"/>
 </LinearLayout>

@@ -198,8 +198,10 @@ public class GetTaskFragment extends Fragment {
                 setClearToArrayList();
 
                 editWhatDoTask.setText("");
-                textPrintTime.setText("00:00:00") ;
-                cur_Status = statusStopWatch.Init ;
+                textTaskLatitude.setText("Latitude: 0");
+                textTaskLongitude.setText("Longitude: 0");
+                textPrintTime.setText("00:00:00");
+                cur_Status = statusStopWatch.Init;
             }
         });
 
