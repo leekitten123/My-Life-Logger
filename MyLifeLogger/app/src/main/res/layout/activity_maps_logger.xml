@@ -29,13 +29,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="한 일 확인"/>
+            android:text="한 일 확인"
+            android:onClick="onClickTask"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="이벤트 확인"/>
+            android:text="이벤트 확인"
+            android:onClick="onClickEvent"/>
     </LinearLayout>
 
 </LinearLayout>

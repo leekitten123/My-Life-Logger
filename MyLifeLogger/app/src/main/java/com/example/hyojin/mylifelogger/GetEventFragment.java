@@ -36,7 +36,7 @@ public class GetEventFragment extends Fragment {
     static int eventCategory = 0 ;
 
     /** 이벤트를 저장하는 데이터베이스 **/
-    MyDataBase eventDB ;
+    static MyDataBase eventDB ;
 
     /** 기본 생성자 **/
     public GetEventFragment() {}
