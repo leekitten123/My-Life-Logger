@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class GetTaskFragment extends Fragment {
     int myTimerCount = 1 ;
     long myBaseTime ;
     long myPauseTime ;
+    long resetNow ;
 
     /** 스톱워치에 사용할 뷰 **/
     TextView textPrintTime ;
@@ -53,12 +55,20 @@ public class GetTaskFragment extends Fragment {
         }
     };
 
+    /** Spinner에서 가르키는 항목 **/
+    static int taskCategory = 0 ;
+
+    /** 이벤트를 저장하는 데이터베이스 **/
+    MyDataBase taskDB ;
+
     /** 기본 생성자 **/
     public GetTaskFragment() {}
 
     /** GetTaskFragment 생성 **/
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_get_task, container, false);
+
+        taskDB = new MyDataBase(getActivity(), "TaskDataBase.db", null, 1);
 
         /** 초기 달력 출력 **/
         TextView textViewCalenderTask = (TextView) view.findViewById(R.id.text_CalenderTask);
@@ -69,12 +79,10 @@ public class GetTaskFragment extends Fragment {
         Spinner spinner = (Spinner)view.findViewById(R.id.spinnerTask);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                taskCategory = position ;
             }
 
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         /** 위치정보를 보여주는 뷰 **/
@@ -102,6 +110,9 @@ public class GetTaskFragment extends Fragment {
                     case Run:
                         myTimer.removeMessages(0);
                         myPauseTime = SystemClock.elapsedRealtime();
+
+                        resetNow = SystemClock.elapsedRealtime() ;
+
                         btnTimeStatus.setText("시작");
                         btnTimeRecord.setText("초기화");
                         cur_Status = statusStopWatch.Pause;
@@ -131,7 +142,7 @@ public class GetTaskFragment extends Fragment {
                         break;
 
                     case Pause:
-                        Toast.makeText(getActivity().getApplicationContext(), getTimeOut(), Toast.LENGTH_SHORT).show() ;
+                        Toast.makeText(getActivity().getApplicationContext(), getTimeOutReset(), Toast.LENGTH_SHORT).show() ;
                         startLocationService();
                         myTimer.removeMessages(0) ;
                         btnTimeStatus.setText("시작") ;
@@ -162,6 +173,18 @@ public class GetTaskFragment extends Fragment {
                 };
 
                 new DatePickerDialog(view.getContext(), dateSetListener, iYear, iMonth, iDate).show();
+            }
+        });
+
+        /** DB에 값 저장하기 **/
+        Button btnSaveTask = (Button) view.findViewById(R.id.btn_SaveTask) ;
+        btnSaveTask.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                int realDateNum = (iYear * 10000) + (iMonth * 100) + 100 + iDate ;
+                EditText editWhatDoTask = (EditText) view.findViewById(R.id.whatdoTask) ;
+
+                taskDB.insertData(latitude, longitude, taskCategory, realDateNum, 0, editWhatDoTask.getText().toString());
+                editWhatDoTask.setText("");
             }
         });
 
@@ -197,5 +220,21 @@ public class GetTaskFragment extends Fragment {
         String easy_outTime = String.format("%02d:%02d:%02d", (outTime/1000)/60, (outTime/1000)%60, (outTime%1000)/10) ;
 
         return easy_outTime ;
+    }
+
+    public String getTimeOutReset() {
+        long now = SystemClock.elapsedRealtime() ;
+        long outTime = resetNow - myBaseTime ;
+        String easy_outTime = String.format("%02d:%02d:%02d", (outTime/1000)/60, (outTime/1000)%60, (outTime%1000)/10) ;
+
+        return easy_outTime ;
+    }
+
+    public int getTimeToInt() {
+        long now = SystemClock.elapsedRealtime() ;
+        long outTime = now - myBaseTime ;
+        String easy_outTime = String.format("%02d%02d%02d", (outTime/1000)/60, (outTime/1000)%60, (outTime%1000)/10) ;
+
+        return Integer.parseInt(easy_outTime) ;
     }
 }

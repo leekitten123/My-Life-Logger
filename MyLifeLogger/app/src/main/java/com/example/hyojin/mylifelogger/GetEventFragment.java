@@ -59,9 +59,7 @@ public class GetEventFragment extends Fragment {
                 eventCategory = position ;
             }
 
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         /** 위치정보를 보여주는 뷰 **/

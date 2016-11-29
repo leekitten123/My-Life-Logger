@@ -169,7 +169,8 @@
             android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:gravity="start"
-            android:background="@drawable/draws"/>
+            android:background="@drawable/draws"
+            android:id="@+id/whatdoTask"/>
     </LinearLayout>
 
     <Button
@@ -177,5 +178,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:id="@+id/btn_SaveTask"
         android:text="저장"/>
 </LinearLayout>
