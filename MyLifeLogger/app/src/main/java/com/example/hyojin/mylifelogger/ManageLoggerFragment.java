@@ -5,16 +5,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ScrollView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class ManageLoggerFragment extends Fragment {
 
-    final MyDataBase eventDB = new MyDataBase(getContext(), "EventDataBase.db", null, 1);
-    final MyDataBase taskDB = new MyDataBase(getContext(), "TaskDataBase.db", null, 1);
+    MyDataBase eventDB;
+    MyDataBase taskDB;
 
-//    ScrollView scrollViewTask = (ScrollView) getActivity().findViewById(R.id.scroll_Task);
-    ScrollView scrollViewEvent;
+    LinearLayout scrollLinearTask;
+    LinearLayout scrollLinearEvent;
 
     public ManageLoggerFragment() {
     }
@@ -22,22 +22,35 @@ public class ManageLoggerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manage_logger, container, false);
 
-        scrollViewEvent = (ScrollView) view.findViewById(R.id.scroll_Event);
-/*
-        for (int i = 0 ; i < taskDB.getSizeDB() ; i++) {
+        eventDB = new MyDataBase(getContext(), "EventDataBase.db", null, 1);
+        taskDB = new MyDataBase(getContext(), "TaskDataBase.db", null, 1);
 
+        scrollLinearTask = (LinearLayout) view.findViewById(R.id.scroll_LinearTask);
+        scrollLinearEvent = (LinearLayout) view.findViewById(R.id.scroll_LinearEvent);
+
+        for (int i = 0 ; i < taskDB.getSizeDB() ; i++) {
+            if (taskDB.getTimeToDB(i) == 0) {
+                TextView textView = new TextView(getActivity());
+                textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                textView.setText("내용: " + taskDB.getWhatDoToDB(i) + " " + taskDB.getCategoryDateToDB(i));
+                textView.setTextSize(15);
+
+                scrollLinearTask.addView(textView);
+            }
         }
 
         for (int i = 0 ; i < eventDB.getSizeDB() ; i++) {
+            if (eventDB.getTimeToDB(i) == 0) {
+                TextView textView = new TextView(getActivity());
+                textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                textView.setText("내용: " + eventDB.getWhatDoToDB(i) + " " + eventDB.getCategoryDateToDB(i));
+                textView.setTextSize(15);
 
-        }*/
-
-        EditText edit = new EditText(view.getContext());
-        edit.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-
-        scrollViewEvent.addView(edit);
-
+                scrollLinearEvent.addView(textView);
+            }
+        }
 
         return view ;
     }

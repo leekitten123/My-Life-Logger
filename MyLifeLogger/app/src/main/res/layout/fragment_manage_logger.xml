@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,49 +9,70 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#4682B4"
+        android:paddingBottom="5dp"
         android:paddingLeft="15dp"
         android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:background="#4682B4"
         android:text="로거 관리하기"
-        android:textSize="15dp"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        android:textSize="15dp" />
 
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_margin="1dp"
+        android:background="#FFFFFF"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:background="#FFFFFF"
-        android:id="@+id/scroll_Task">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="한 일"
             android:textColor="#000000"
-            android:textSize="25dp"/>
+            android:textSize="25dp" />
 
-    </ScrollView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <ScrollView
+            <LinearLayout
+                android:id="@+id/scroll_LinearTask"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_margin="1dp"
+        android:background="#FFFFFF"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:background="#FFFFFF"
-        android:id="@+id/scroll_Event">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="이벤트"
             android:textColor="#000000"
-            android:textSize="25dp"/>
+            android:textSize="25dp" />
 
-    </ScrollView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/scroll_LinearEvent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+        </ScrollView>
+    </LinearLayout>
 </LinearLayout>
