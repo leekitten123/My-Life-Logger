@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DCDCDC"
     android:orientation="vertical"
     tools:context="com.example.hyojin.mylifelogger.ManageLoggerFragment">
 
@@ -17,4 +18,41 @@
         android:textSize="15dp"
         android:textColor="#FFFFFF"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="1dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="#FFFFFF"
+        android:id="@+id/scroll_Task">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="한 일"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+
+    </ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="1dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="#FFFFFF"
+        android:id="@+id/scroll_Event">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이벤트"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+
+    </ScrollView>
 </LinearLayout>
