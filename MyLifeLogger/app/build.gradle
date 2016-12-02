@@ -31,5 +31,6 @@ dependencies {
     compile 'com.android.support:design:25.0.0'
     compile 'com.labo.kaji:fragmentanimations:0.1.0'
     compile 'com.google.android.gms:play-services:9.8.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     testCompile 'junit:junit:4.12'
 }

@@ -28,27 +28,62 @@ public class ManageLoggerFragment extends Fragment {
         scrollLinearTask = (LinearLayout) view.findViewById(R.id.scroll_LinearTask);
         scrollLinearEvent = (LinearLayout) view.findViewById(R.id.scroll_LinearEvent);
 
+        int numTask = 0 ;
+        int numEvent = 0 ;
+
         for (int i = 0 ; i < taskDB.getSizeDB() ; i++) {
             if (taskDB.getTimeToDB(i) == 0) {
-                TextView textView = new TextView(getActivity());
-                textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT));
-                textView.setText("내용: " + taskDB.getWhatDoToDB(i) + " " + taskDB.getCategoryDateToDB(i));
-                textView.setTextSize(15);
+                numTask++ ;
 
-                scrollLinearTask.addView(textView);
+                LinearLayout linearLayout = new LinearLayout(getActivity()) ;
+                linearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+                TextView textView1 = new TextView(getActivity());
+                textView1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                textView1.setText(numTask + ". " + taskDB.getWhatDoToDB(i));
+                textView1.setTextSize(20);
+
+                TextView textView2 = new TextView(getActivity());
+                textView2.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                textView2.setText(taskDB.getSnippet(i, true));
+                textView2.setTextSize(15);
+
+                linearLayout.addView(textView1);
+                linearLayout.addView(textView2);
+
+                scrollLinearTask.addView(linearLayout);
             }
         }
 
         for (int i = 0 ; i < eventDB.getSizeDB() ; i++) {
             if (eventDB.getTimeToDB(i) == 0) {
-                TextView textView = new TextView(getActivity());
-                textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT));
-                textView.setText("내용: " + eventDB.getWhatDoToDB(i) + " " + eventDB.getCategoryDateToDB(i));
-                textView.setTextSize(15);
+                numEvent++ ;
 
-                scrollLinearEvent.addView(textView);
+                LinearLayout linearLayout = new LinearLayout(getActivity()) ;
+                linearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+                TextView textView1 = new TextView(getActivity());
+                textView1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                textView1.setText(numEvent + ". " + taskDB.getWhatDoToDB(i));
+                textView1.setTextSize(20);
+
+                TextView textView2 = new TextView(getActivity());
+                textView2.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                textView2.setText(eventDB.getSnippet(i, false));
+                textView2.setTextSize(15);
+
+                linearLayout.addView(textView1);
+                linearLayout.addView(textView2);
+
+                scrollLinearEvent.addView(linearLayout);
             }
         }
 

@@ -67,7 +67,7 @@ public class MyDataBase extends SQLiteOpenHelper {
 
     }
 
-    public String getCategoryDateToDB (int num) {
+    public String getCategoryToDB (int num) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM database", null);
 
@@ -76,14 +76,13 @@ public class MyDataBase extends SQLiteOpenHelper {
         }
 
         int category = cursor.getInt(cursor.getColumnIndex("category"));
-        int date = cursor.getInt(cursor.getColumnIndex("date"));
+
         SpinnerCategory spinnerCategory = new SpinnerCategory() ;
 
         cursor.close();
         db.close();
 
-        return  new String("카테고리: " + spinnerCategory.CategoryToString(category) + " 날짜: "+ date) ;
-
+        return  spinnerCategory.CategoryToString(category);
     }
 
     public int getTimeToDB (int num) {
@@ -100,9 +99,23 @@ public class MyDataBase extends SQLiteOpenHelper {
         db.close();
 
         return time ;
-
     }
 
+    public int getDateToDB (int num) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM database", null);
+
+        for (int i = 0 ; i <= num ; i++) {
+            cursor.moveToNext() ;
+        }
+
+        int date = cursor.getInt(cursor.getColumnIndex("date"));
+
+        cursor.close();
+        db.close();
+
+        return date ;
+    }
 
     public int getSizeDB() {
         SQLiteDatabase db = getReadableDatabase();
@@ -116,5 +129,14 @@ public class MyDataBase extends SQLiteOpenHelper {
         return size ;
     }
 
+    public String getSnippet(int num, boolean isTask) {
 
+        if (isTask) {
+            return "날짜: " + getDateToDB(num) + " 카테고리: " + getCategoryToDB(num) + " 시간: " + getTimeToDB(num);
+
+        } else {
+            return "날짜: " + getDateToDB(num) + " 카테고리: " + getCategoryToDB(num);
+        }
+
+    }
 }

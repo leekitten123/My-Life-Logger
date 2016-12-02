@@ -38,9 +38,9 @@ public class MapsLoggerActivity extends FragmentActivity implements OnMapReadyCa
         for (int i = 0 ; i < taskDB.getSizeDB() ; i++) {
             if (i == 0) {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(taskDB.getLatLngToDB(i)));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(taskDB.getLatLngToDB(i), 18));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(taskDB.getLatLngToDB(i), 16));
             }
-            mMap.addMarker(new MarkerOptions().position(taskDB.getLatLngToDB(i)).title(taskDB.getWhatDoToDB(i)).snippet(taskDB.getCategoryDateToDB(i) + " 시간: " + taskDB.getTimeToDB(i))) ;
+            mMap.addMarker(new MarkerOptions().position(taskDB.getLatLngToDB(i)).title(taskDB.getWhatDoToDB(i)).snippet(taskDB.getSnippet(i, true)));
 
             if (taskDB.getTimeToDB(i) == 0) {
                 polylineOptions = new PolylineOptions() ;
@@ -56,9 +56,9 @@ public class MapsLoggerActivity extends FragmentActivity implements OnMapReadyCa
         for (int i = 0 ; i < eventDB.getSizeDB() ; i++) {
             if (i == 0) {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(eventDB.getLatLngToDB(i)));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(eventDB.getLatLngToDB(i), 18));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(eventDB.getLatLngToDB(i), 16));
             }
-            mMap.addMarker(new MarkerOptions().position(eventDB.getLatLngToDB(i)).title(eventDB.getWhatDoToDB(i)).snippet(eventDB.getCategoryDateToDB(i))) ;
+            mMap.addMarker(new MarkerOptions().position(eventDB.getLatLngToDB(i)).title(eventDB.getWhatDoToDB(i)).snippet(eventDB.getSnippet(i, false)));
         }
     }
 }

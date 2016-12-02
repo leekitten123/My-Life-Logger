@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.hyojin.mylifelogger.StatisLoggerFragment">
 
     <TextView
@@ -15,4 +16,9 @@
         android:text="로거 통계내기"
         android:textSize="15dp"
         android:textColor="#FFFFFF"/>
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pie_Chart"/>
 </LinearLayout>
