@@ -2,11 +2,14 @@ package com.example.hyojin.mylifelogger;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +71,9 @@ public class GetTaskFragment extends Fragment {
 
     /** 이벤트를 저장하는 데이터베이스 **/
     MyDataBase taskDB;
+
+    /**  **/
+    String strPhoto = null ;
 
     /** 기본 생성자 **/
     public GetTaskFragment() {
@@ -179,6 +186,26 @@ public class GetTaskFragment extends Fragment {
             }
         });
 
+        /**  **/
+        ImageButton btn_TaskCamera = (ImageButton) view.findViewById(R.id.taskCamera) ;
+        btn_TaskCamera.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 1);
+            }
+        });
+
+        /**  **/
+        ImageButton btn_TaskCameraSave = (ImageButton) view.findViewById(R.id.taskCameraSave) ;
+        btn_TaskCameraSave.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_PICK);
+                i.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+                i.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, 2);
+            }
+        });
+
         /** DB에 값 저장하기 **/
         Button btnSaveTask = (Button) view.findViewById(R.id.btn_SaveTask);
         btnSaveTask.setOnClickListener(new Button.OnClickListener() {
@@ -191,8 +218,8 @@ public class GetTaskFragment extends Fragment {
                 setDataToArrayList(latitude, longitude, currentTime);
 
                 for (int i = 0; i < tempLatitude.size(); i++) {
-                    taskDB.insertData(tempLatitude.get(i), tempLongitude.get(i), taskCategory, realDateNum, tempTime.get(i), editWhatDoTask.getText().toString());
-                    Log.d("SQL", tempLatitude.get(i) + " " + tempLongitude.get(i) + " " + taskCategory + " " + realDateNum + " " + tempTime.get(i) + " " + editWhatDoTask.getText().toString()) ;
+                    taskDB.insertData(tempLatitude.get(i), tempLongitude.get(i), taskCategory, realDateNum, tempTime.get(i), editWhatDoTask.getText().toString(), strPhoto);
+                    Log.d("SQL", tempLatitude.get(i) + " " + tempLongitude.get(i) + " " + taskCategory + " " + realDateNum + " " + tempTime.get(i) + " " + editWhatDoTask.getText().toString() + " " + strPhoto) ;
                 }
 
                 setClearToArrayList();
@@ -263,5 +290,21 @@ public class GetTaskFragment extends Fragment {
         tempLatitude.clear();
         tempLongitude.clear();
         tempTime.clear();
+    }
+
+    /**  **/
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 2) {
+            Uri uri;
+
+            try {
+                uri = data.getData();
+                strPhoto = uri.toString();
+                MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                Log.e("Wow", strPhoto);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

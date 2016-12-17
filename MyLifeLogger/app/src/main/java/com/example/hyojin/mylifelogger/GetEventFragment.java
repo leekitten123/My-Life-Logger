@@ -2,9 +2,13 @@ package com.example.hyojin.mylifelogger;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +42,9 @@ public class GetEventFragment extends Fragment {
 
     /** 이벤트를 저장하는 데이터베이스 **/
     static MyDataBase eventDB ;
+
+    /**  **/
+    String strPhoto = null ;
 
     /** 기본 생성자 **/
     public GetEventFragment() {}
@@ -94,6 +102,26 @@ public class GetEventFragment extends Fragment {
             }
         });
 
+        /**  **/
+        ImageButton btn_EventCamera = (ImageButton) view.findViewById(R.id.eventCamera) ;
+        btn_EventCamera.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 1);
+            }
+        });
+
+        /**  **/
+        ImageButton btn_EventCameraSave = (ImageButton) view.findViewById(R.id.eventCameraSave) ;
+        btn_EventCameraSave.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_PICK);
+                i.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+                i.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, 2);
+            }
+        });
+
         /** DB에 값 저장하기 **/
         Button btnSaveEvent = (Button) view.findViewById(R.id.btn_SaveEvent) ;
         btnSaveEvent.setOnClickListener(new Button.OnClickListener() {
@@ -101,8 +129,8 @@ public class GetEventFragment extends Fragment {
                 int realDateNum = (iYear * 10000) + (iMonth * 100) + 100 + iDate ;
                 EditText editWhatDoEvent = (EditText) view.findViewById(R.id.whatDoEvent) ;
 
-                eventDB.insertData(latitude, longitude, eventCategory, realDateNum, 0, editWhatDoEvent.getText().toString());
-
+                eventDB.insertData(latitude, longitude, eventCategory, realDateNum, 0, editWhatDoEvent.getText().toString(), strPhoto);
+                Log.d("SQL", latitude + " " + longitude + " " + eventCategory + " " + realDateNum + " " + editWhatDoEvent.getText().toString() + " " + strPhoto) ;
                 editWhatDoEvent.setText("");
                 textEventLatitude.setText("Latitude: 0");
                 textEventLongitude.setText("Longitude: 0");
@@ -129,6 +157,22 @@ public class GetEventFragment extends Fragment {
 
         textEventLatitude.setText("Latitude: " + latitude);
         textEventLongitude.setText("Longitude: " + longitude);
+    }
+
+    /**  **/
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 2) {
+            Uri uri;
+
+            try {
+                uri = data.getData();
+                strPhoto = uri.toString();
+                MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                Log.e("Wow", strPhoto);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
