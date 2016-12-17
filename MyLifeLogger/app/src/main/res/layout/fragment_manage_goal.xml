@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="20161201"
+                android:id="@+id/text_FromTime"
                 android:textSize="20dp"/>
 
             <TextView
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="20161202"
+                android:id="@+id/text_ToTime"
                 android:textSize="20dp"/>
         </LinearLayout>
     </LinearLayout>
@@ -70,21 +70,28 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:background="#FFFFFF"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="목표 설정"
-            android:textColor="#000000"
-            android:textSize="25dp"/>
+            android:orientation="horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="업데이트"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="목표 설정"
+                android:textColor="#000000"
+                android:textSize="25dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/btn_SettingGoals"
+                android:text="업데이트"/>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -186,7 +193,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_game1"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -195,7 +203,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_game2"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -204,7 +213,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_game3"/>
             </TableRow>
 
             <TableRow
@@ -232,7 +242,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_eat1"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -241,7 +252,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_eat2"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -250,7 +262,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_eat3"/>
             </TableRow>
 
             <TableRow
@@ -278,7 +291,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_move1"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -287,7 +301,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_move2"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -296,7 +311,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_move3"/>
             </TableRow>
 
             <TableRow
@@ -324,7 +340,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_study1"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -333,7 +350,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_study2"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -342,7 +360,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_study3"/>
             </TableRow>
 
             <TableRow
@@ -370,7 +389,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_work1"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -379,7 +399,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_work2"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -388,7 +409,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_work3"/>
             </TableRow>
 
             <TableRow
@@ -417,7 +439,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_other1"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -426,7 +449,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_other2"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -435,7 +459,8 @@
                     android:layout_margin="1dp"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:background="#FFFFFF"/>
+                    android:background="#FFFFFF"
+                    android:id="@+id/text_other3"/>
             </TableRow>
         </TableLayout>
     </LinearLayout>
@@ -449,5 +474,5 @@
         android:background="#4682B4"
         android:text="확인"
         android:textColor="#FFFFFF"
-        android:id="@+id/btn_SaveEvent"/>
+        android:id="@+id/btn_WatchGoal"/>
 </LinearLayout>

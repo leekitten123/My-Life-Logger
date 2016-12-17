@@ -31,8 +31,12 @@ public class ManageLoggerFragment extends Fragment {
         int numTask = 0 ;
         int numEvent = 0 ;
 
-        for (int i = 0 ; i < taskDB.getSizeDB() ; i++) {
-            if (taskDB.getTimeToDB(i) == 0) {
+        for (int i = 0 ; i < taskDB.getSizeDB() - 1 ; i++) {
+            if (taskDB.getTimeToDB(i) >= taskDB.getTimeToDB(i + 1) ||  (i == taskDB.getSizeDB() - 2)) {
+                if (i == taskDB.getSizeDB() - 2) {
+                    i++ ;
+                }
+
                 numTask++ ;
 
                 LinearLayout linearLayout = new LinearLayout(getActivity()) ;
